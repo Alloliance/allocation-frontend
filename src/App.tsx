@@ -3,6 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import { flows as ballerineFlows } from "@ballerine/web-sdk";
 import ballerineConfig from "./config.ballerine";
+import { Button } from "./components/button";
+import { PageContainer } from "./components/PageContainer";
 
 enum Page {
   Information,
@@ -40,32 +42,51 @@ function App() {
   }, []);
 
   return (
-    <div className="flex w-full overscroll-x-none">
-      <div
-        className={`w-screen absolute transition-all duration-700 h-full ${
+    <div className="flex w-full overscroll-x-none font-mono">
+      <PageContainer
+        classes={
           page === Page.Information ? "translate-x-0" : "-translate-x-full"
-        }`}
+        }
       >
-        <button
-          onClick={onToggleApp}
-          className="text-white border rounded border-pink-400 shadow-neon py-2 px-6 bg-pink-700 bg-opacity-15 hover:bg-opacity-25"
-        >
-          Get started
-        </button>
-      </div>
-      <div
-        className={`p-2 w-screen absolute transition-all duration-700 h-full ${
-          page === Page.Web3App ? "translate-x-0" : "translate-x-full"
-        }`}
+        <header className="my-44 ml-44 text-7xl font-lato	 text-pink-400 text-shadow-neon ">
+          ALLOLIANCE
+        </header>
+        <div className="flex justify-center text-center">
+          <div className=" px-8 md:px-16 max-w-md">
+            <h4 className="text-pink-400 text-shadow-neon mb-4 text-xl">
+              Discover the Power of Our Web3 App
+            </h4>
+            <p className="text-white mb-4 ">
+              Our revolutionary web3 app simplifies your online experience.
+            </p>
+            <Button onClick={onToggleApp}>Get started</Button>
+          </div>
+          <div className=" x-8 md:px-16 max-w-md">
+            <h4 className="text-pink-400 text-shadow-neon mb-4 text-xl">
+              Discover the Power of Our Web3 App
+            </h4>
+            <p className="text-white mb-4 ">
+              Our revolutionary web3 app simplifies your online experience.
+            </p>
+            <Button onClick={onToggleApp}>Get started</Button>
+          </div>
+          <div className=" x-8 md:px-16 max-w-md">
+            <h4 className="text-pink-400 text-shadow-neon mb-4 text-xl">
+              Discover the Power of Our Web3 App
+            </h4>
+            <p className="text-white mb-4 ">
+              Our revolutionary web3 app simplifies your online experience.
+            </p>
+            <Button onClick={onToggleApp}>Get started</Button>
+          </div>
+        </div>
+      </PageContainer>
+      <PageContainer
+        classes={page === Page.Web3App ? "translate-x-0" : "translate-x-full"}
       >
-        <button
-          onClick={onToggleApp}
-          className="text-white border rounded border-pink-400 shadow-neon py-2 px-6 bg-pink-700 bg-opacity-15 hover:bg-opacity-25"
-        >
-          Back
-        </button>
+        <Button onClick={onToggleApp}>BACK</Button>
         <div id="my-kyc-flow" />
-      </div>
+      </PageContainer>
     </div>
   );
 }

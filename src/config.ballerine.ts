@@ -6,14 +6,14 @@ export default {
   //   baseUrl: 'http://localhost:3001',
   // },
   uiConfig: {
-    uiPack: "default",
-    //uiPack: "future",
+    //uiPack: "default",
+    uiPack: "future",
     general: {
       colors: {
         /*Change the primary color to "#6236FF", click Run, and see the how the theme changes */
         //primary: "#6236FF",
-        primary: "#A9E24B", //A9E24B
-        secondary: "#6236FF",
+        primary: "rgb(236 72 153)", //A9E24B
+        secondary: "rgb(157 23 77)",
         text: "#6236FF",
         danger: "#6236FF",
         //primary: "#000FFF",
