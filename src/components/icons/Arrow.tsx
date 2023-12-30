@@ -1,6 +1,6 @@
 type Props = { size?: "large" | "small" };
 export const Arrow = ({ size }: Props) => {
-  const pixels = size === "large" ? "50px" : "24px";
+  const pixels = size === "large" ? "50px" : "16px";
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

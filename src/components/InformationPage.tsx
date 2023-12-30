@@ -18,7 +18,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     >
       <header className="flex flex-col">
         <div className="flex justify-end text-white my-4">
-          <Button onClick={onGoToProfile} classes="flex items-center gap-4">
+          <Button onClick={onGoToProfile} classes="flex items-center gap-2">
             <span>Get Started</span> <ArrowRight size="small" />
           </Button>
         </div>
