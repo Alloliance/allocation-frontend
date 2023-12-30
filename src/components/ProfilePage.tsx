@@ -1,5 +1,5 @@
 import { Page } from "../App";
-import { BackArrow } from "./icons/BackArrow";
+import { ArrowLeft } from "./icons/ArrowLeft";
 import { Button } from "./Button";
 import { PageContainer } from "./PageContainer";
 
@@ -20,7 +20,7 @@ export const ProfilePage = ({
   };
   return (
     <PageContainer classes={getTranslateClass()}>
-      <BackArrow onClick={onGoBackToInformationPage} />
+      <ArrowLeft size="large" onClick={onGoBackToInformationPage} />
       <div className="flex justify-center h-full">
         <div className="text-pink-50 w-4/5">
           <h1 className="text-6xl font-lato text-pink-400 text-shadow-neon pl-8 relative top-4">

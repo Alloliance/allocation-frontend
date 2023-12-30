@@ -1,11 +1,8 @@
 import { Page } from "../App";
-import { NeonButton } from "./NeonButton";
-import { PageContainer } from "./PageContainer";
 import { flows as ballerineFlows } from "@ballerine/web-sdk";
 import ballerineConfig from "../config.ballerine";
 import { useEffect } from "react";
-import { BackArrow } from "./icons/BackArrow";
-import { BackArrowUp } from "./icons/BackArrowUp";
+import { ArrowUp } from "./icons/BackArrowUp";
 
 type Props = {
   activePage: Page;
@@ -41,7 +38,7 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
         activePage === Page.Verify ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <BackArrowUp onClick={onGoBackToProfilePage} />
+      <ArrowUp onClick={onGoBackToProfilePage} size="large" />
       <div id="my-kyc-flow" />
     </div>
   );

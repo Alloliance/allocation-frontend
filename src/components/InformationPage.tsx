@@ -1,5 +1,5 @@
 import { Page } from "../App";
-import { BackArrow } from "./icons/BackArrow";
+import { ArrowLeft } from "./icons/ArrowLeft";
 import { Button } from "./Button";
 import { NeonButton } from "./NeonButton";
 import { PageContainer } from "./PageContainer";
