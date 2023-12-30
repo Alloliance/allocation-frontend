@@ -1,6 +1,9 @@
 import { Page } from "../App";
+import { BackArrow } from "./icons/BackArrow";
+import { Button } from "./Button";
 import { NeonButton } from "./NeonButton";
 import { PageContainer } from "./PageContainer";
+import { ArrowRight } from "./icons/ArrowRight";
 
 type Props = {
   activePage: Page;
@@ -13,8 +16,17 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
         activePage === Page.Information ? "translate-x-0" : "-translate-x-full"
       }
     >
-      <header className="my-44 ml-44 text-7xl font-lato text-pink-400 text-shadow-neon ">
-        ALLOLIANCE
+      <header className="flex flex-col">
+        <div className="flex justify-end text-white my-4">
+          <Button onClick={onGoToProfile} classes="flex items-center gap-4">
+            <span>Get Started</span> <ArrowRight size="small" />
+          </Button>
+        </div>
+        <div className="flex justify-center mt-28 mb-44">
+          <h1 className="text-7xl font-lato text-pink-400 text-shadow-neon">
+            ALLOLIANCE
+          </h1>
+        </div>
       </header>
       <div className="flex justify-center text-center">
         <div className=" px-8 md:px-16 max-w-md">

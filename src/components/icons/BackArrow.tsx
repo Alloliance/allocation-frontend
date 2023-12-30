@@ -1,4 +1,4 @@
-type Props = { onClick: () => void; classes?: string };
+type Props = { onClick?: () => void; classes?: string };
 export const BackArrow = ({ onClick, classes }: Props) => {
   return (
     <button

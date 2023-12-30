@@ -4,8 +4,8 @@ import { PageContainer } from "./PageContainer";
 import { flows as ballerineFlows } from "@ballerine/web-sdk";
 import ballerineConfig from "../config.ballerine";
 import { useEffect } from "react";
-import { BackArrow } from "./BackArrow";
-import { BackArrowUp } from "./BackArrowUp";
+import { BackArrow } from "./icons/BackArrow";
+import { BackArrowUp } from "./icons/BackArrowUp";
 
 type Props = {
   activePage: Page;
@@ -36,13 +36,13 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
   }, []);
 
   return (
-    <PageContainer
-      classes={
+    <div
+      className={`border border-black bg-black w-screen absolute transition-all duration-700 h-full  ${
         activePage === Page.Verify ? "translate-y-0" : "translate-y-full"
-      }
+      }`}
     >
       <BackArrowUp onClick={onGoBackToProfilePage} />
       <div id="my-kyc-flow" />
-    </PageContainer>
+    </div>
   );
 };
