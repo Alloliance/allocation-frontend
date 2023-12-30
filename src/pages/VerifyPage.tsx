@@ -2,7 +2,7 @@ import { Page } from "../App";
 import { flows as ballerineFlows } from "@ballerine/web-sdk";
 import ballerineConfig from "../config.ballerine";
 import { useEffect } from "react";
-import { ArrowUp } from "./icons/BackArrowUp";
+import { ArrowUp } from "../components/icons/BackArrowUp";
 
 type Props = {
   activePage: Page;

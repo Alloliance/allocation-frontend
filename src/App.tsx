@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { InformationPage } from "./components/InformationPage";
-import { ProfilePage } from "./components/ProfilePage";
-import { VerifyPage } from "./components/VerifyPage";
+import { InformationPage } from "./pages/InformationPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { VerifyPage } from "./pages/VerifyPage";
 
 export enum Page {
   Information,
@@ -14,7 +14,7 @@ function App() {
   const [page, setPage] = useState(Page.Information);
 
   return (
-    <div className="flex w-full overscroll-x-none overscroll-y-none font-mono">
+    <div className="flex w-full overscroll-x-none font-mono">
       <InformationPage
         activePage={page}
         onGoToProfile={() => setPage(Page.Profile)}

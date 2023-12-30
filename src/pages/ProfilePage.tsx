@@ -1,7 +1,7 @@
 import { Page } from "../App";
-import { ArrowLeft } from "./icons/ArrowLeft";
-import { Button } from "./Button";
-import { PageContainer } from "./PageContainer";
+import { Button } from "../components/buttons/Button";
+import { ArrowLeft } from "../components/icons/ArrowLeft";
+import { PageContainer } from "../components/PageContainer";
 
 type Props = {
   activePage: Page;
