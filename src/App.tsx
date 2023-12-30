@@ -14,7 +14,7 @@ function App() {
   const [page, setPage] = useState(Page.Information);
 
   return (
-    <div className="flex w-full overscroll-x-none font-mono">
+    <div className="flex w-full overscroll-x-none overscroll-y-none font-mono">
       <InformationPage
         activePage={page}
         onGoToProfile={() => setPage(Page.Profile)}
