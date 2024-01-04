@@ -7,7 +7,11 @@ module.exports = {
       fontFamily: {
         lato: ["Lato", "sans-serif"],
       },
-      backgroundColor: {},
+      backgroundColor: {
+        black: {
+          transparent: "#00000073",
+        },
+      },
       colors: {
         purple: {
           700: "#3a1757",
