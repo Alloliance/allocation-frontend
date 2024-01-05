@@ -1,6 +1,7 @@
 import { Page } from "../App";
 import { Button } from "../components/buttons/Button";
 import { ArrowLeft } from "../components/icons/ArrowLeft";
+import { ArrowRight } from "../components/icons/ArrowRight";
 import { Checkmark } from "../components/icons/Checkmark";
 import { PageContainer } from "../components/PageContainer";
 
@@ -21,7 +22,15 @@ export const ProfilePage = ({
   };
   return (
     <PageContainer classes={getTranslateClass()}>
-      <ArrowLeft size="large" onClick={onGoBackToInformationPage} />
+      <div className="flex text-white my-4">
+        <Button
+          onClick={onGoBackToInformationPage}
+          classes="flex items-center gap-3"
+        >
+          <ArrowLeft size="small" />
+          <span>Go back</span>
+        </Button>
+      </div>
       <div className="flex justify-center h-full">
         <div className="text-pink-50 w-4/5">
           <h1 className="text-6xl text-right font-lato text-pink-400 text-shadow-neon relative top-4 right-14">
@@ -34,15 +43,15 @@ export const ProfilePage = ({
 
                 <Checkmark />
               </div>
-              <div className="grid grid-cols-3 mt-8 gap-2 ">
+              <div className="grid grid-cols-4 mt-8 gap-2 ">
                 <div>Address:</div>
-                <div className="col-span-2">
+                <div className="col-span-3">
                   <div className="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">
                     123-456-789
                   </div>
                 </div>
                 <div>Other:</div>
-                <div className="col-span-2">
+                <div className="col-span-3">
                   <div className="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">
                     Banana-pineapple-grapefruit
                   </div>

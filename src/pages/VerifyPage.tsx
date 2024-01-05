@@ -34,7 +34,7 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
 
   return (
     <div
-      className={`border border-black bg-black w-screen absolute transition-all duration-700 h-full  ${
+      className={`border border-black bg-black-transparent w-screen absolute transition-all duration-700 h-full  ${
         activePage === Page.Verify ? "translate-y-0" : "translate-y-full"
       }`}
     >
