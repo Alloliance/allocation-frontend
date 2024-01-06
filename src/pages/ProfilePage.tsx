@@ -21,7 +21,7 @@ export const ProfilePage = ({
     return "translate-x-full";
   };
   return (
-    <PageContainer classes={getTranslateClass()}>
+    <PageContainer classes={getTranslateClass()} showSecondBlob>
       <div className="flex text-white my-4">
         <Button
           onClick={onGoBackToInformationPage}
@@ -31,8 +31,8 @@ export const ProfilePage = ({
           <span>Go back</span>
         </Button>
       </div>
-      <div className="flex justify-center h-full">
-        <div className="text-pink-50 w-4/5">
+      <div className="flex justify-center h-full w-[900px] mx-auto">
+        <div className="text-pink-50">
           <h1 className="text-6xl text-right font-lato text-pink-400 text-shadow-neon relative top-4 right-14">
             PROFILE
           </h1>

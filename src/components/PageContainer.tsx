@@ -1,19 +1,30 @@
 import { Children, ReactNode } from "react";
-import { Blobby } from "./Blob";
+import { BlobBlue } from "./svgs/BlobBlue";
+import { BlobPink } from "./svgs/BlobPink";
 
 type Props = {
   children: ReactNode | ReactNode[] | string;
-  classes: string;
+  classes?: string;
+  showSecondBlob?: boolean;
 };
 
-export const PageContainer = ({ children, classes }: Props) => {
+export const PageContainer = ({
+  children,
+  classes,
+  showSecondBlob = false,
+}: Props) => {
   return (
     <div
       className={` bg-gradient-to-b from-purple-900 from-30% to-black w-screen absolute transition-all duration-700 h-full ${classes}`}
     >
       <div className="absolute -z-10">
-        <Blobby />
+        <BlobPink />
       </div>
+      {showSecondBlob ? (
+        <div className="absolute -z-10">
+          <BlobBlue />
+        </div>
+      ) : null}
       {children}
     </div>
   );

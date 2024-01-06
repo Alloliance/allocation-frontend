@@ -3,6 +3,7 @@ import { flows as ballerineFlows } from "@ballerine/web-sdk";
 import ballerineConfig from "../config.ballerine";
 import { useEffect } from "react";
 import { ArrowUp } from "../components/icons/BackArrowUp";
+import { PageContainer } from "../components/PageContainer";
 
 type Props = {
   activePage: Page;
@@ -34,8 +35,8 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
 
   return (
     <div
-      className={`border border-black bg-black-transparent w-screen absolute transition-all duration-700 h-full  ${
-        activePage === Page.Verify ? "translate-y-0" : "translate-y-full"
+      className={`border border-black bg-black-transparent w-screen absolute transition-opacity duration-700 h-full  ${
+        activePage === Page.Verify ? "opacity-100 block" : "opacity-0 hidden"
       }`}
     >
       <ArrowUp onClick={onGoBackToProfilePage} size="large" />
@@ -43,3 +44,7 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
     </div>
   );
 };
+/**
+ * 
+      
+ */
