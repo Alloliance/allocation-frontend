@@ -1,4 +1,4 @@
-export const Blobby = () => (
+export const BlobPink = () => (
   <svg
     className=" w-lvw"
     viewBox="-400 -120 1000 1000"
