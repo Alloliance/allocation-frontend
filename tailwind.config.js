@@ -19,7 +19,6 @@ module.exports = {
       },
       backgroundColor: {
         black: {
-          full: "#00000",
           transparent: "#00000073",
         },
       },

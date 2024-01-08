@@ -543,6 +543,10 @@ video {
   position: relative;
 }
 
+.bottom-12 {
+  bottom: 3rem;
+}
+
 .bottom-6 {
   bottom: 1.5rem;
 }
@@ -579,6 +583,10 @@ video {
   grid-column: span 3 / span 3;
 }
 
+.m-10 {
+  margin: 2.5rem;
+}
+
 .m-2 {
   margin: 0.5rem;
 }
@@ -601,6 +609,11 @@ video {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .mb-0 {
@@ -651,6 +664,10 @@ video {
   height: 13rem;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -661,6 +678,10 @@ video {
 
 .w-52 {
   width: 13rem;
+}
+
+.w-\[900px\] {
+  width: 900px;
 }
 
 .w-full {
@@ -750,6 +771,10 @@ video {
   flex-wrap: wrap;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
 }
@@ -772,6 +797,10 @@ video {
 
 .gap-3 {
   gap: 0.75rem;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .justify-self-end {
@@ -830,10 +859,6 @@ video {
   background-color: rgb(49 10 31 / var(--tw-bg-opacity));
 }
 
-.bg-black-full {
-  background-color: #00000;
-}
-
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -861,10 +886,6 @@ video {
 .via-black {
   --tw-gradient-to: rgb(0 0 0 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #000 var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-
-.to-black {
-  --tw-gradient-to: #000 var(--tw-gradient-to-position);
 }
 
 .to-pink-500 {
