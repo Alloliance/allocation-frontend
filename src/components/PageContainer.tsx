@@ -15,7 +15,7 @@ export const PageContainer = ({
 }: Props) => {
   return (
     <div
-      className={` bg-gradient-to-b from-purple-900 from-30% to-black w-screen absolute transition-all duration-700 h-full ${classes}`}
+      className={` w-screen absolute transition-all duration-700 ${classes}`}
     >
       <div className="absolute -z-10">
         <BlobPink />
