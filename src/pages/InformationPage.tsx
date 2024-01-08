@@ -23,7 +23,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
           </Button>
         </div>
         <div className="flex justify-center mt-28 mb-44">
-          <h1 className="text-7xl font-lato text-pink-400 text-shadow-neon animate-hover">
+          <h1 className="sm:text-7xl text-6xl font-lato text-pink-400 text-shadow-neon animate-hover">
             ALLOLIANCE
           </h1>
         </div>
