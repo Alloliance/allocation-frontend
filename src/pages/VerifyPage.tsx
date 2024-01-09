@@ -10,9 +10,6 @@ type Props = {
 };
 export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
   const [animationFinished, setAnimationFinished] = useState(false);
-  const doSomethingFn = (data: any) => {
-    console.log("User finished ballerine flow!", data);
-  };
 
   const startBallerineFlow = async () => {
     await ballerineFlows.init(ballerineConfig).then(() => {
@@ -34,7 +31,6 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
   }, []);
 
   useEffect(() => {
-    //startBallerineFlow();
     if (activePage !== Page.Verify) {
       setTimeout(() => setAnimationFinished(true), 1000);
     } else {
@@ -44,7 +40,7 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
 
   return (
     <div
-      className={`bg-black-transparent2 w-screen absolute transition-opacity duration-1000 h-full  ${
+      className={`bg-black-90 w-screen absolute transition-opacity duration-1000 h-full  ${
         activePage === Page.Verify ? "opacity-100 z-0" : "opacity-0 "
       } ${animationFinished ? "-z-10" : ""}`}
     >

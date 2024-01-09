@@ -7,6 +7,7 @@ import { InformationBox } from "../components/InformationBox";
 
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Loading } from "../components/icons/Loading";
 
 type Props = {
   activePage: Page;
@@ -15,6 +16,46 @@ type Props = {
 
 export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
   const account = useAccount();
+
+  const customConnectWalletButton = ({
+    account,
+    chain,
+    openConnectModal,
+    authenticationStatus,
+    mounted
+  }: any) => {
+    const loading = authenticationStatus === 'loading';
+    if (loading) {
+      return <Button
+        onClick={openConnectModal}
+        classes="flex items-center gap-2"
+      >
+        <Loading /><span>Connecting..</span>
+      </Button>
+    }
+
+    const ready = mounted && !loading;
+    const connected =
+      ready &&
+      account &&
+      chain &&
+      (!authenticationStatus ||
+        authenticationStatus === 'authenticated');
+
+    if (connected) {
+      onGoToProfile();
+    }
+
+    return (
+      <Button
+        onClick={openConnectModal}
+        classes="flex items-center gap-2"
+      >
+        Connect Wallet
+      </Button>
+    );
+  }
+
   return (
     <PageContainer
       classes={
@@ -25,20 +66,11 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
         <div className="flex justify-end text-white my-4">
           {account.isConnected ? (
             <Button onClick={onGoToProfile} classes="flex items-center gap-2">
-              <span>Get Started</span> <ArrowRight size="small" />
+              <span>To your profile</span> <ArrowRight size="small" />
             </Button>
           ) : (
             <ConnectButton.Custom>
-              {({ openConnectModal }) => {
-                return (
-                  <Button
-                    onClick={openConnectModal}
-                    classes="flex items-center gap-2"
-                  >
-                    Connect Wallet
-                  </Button>
-                );
-              }}
+              {customConnectWalletButton}
             </ConnectButton.Custom>
           )}
         </div>
