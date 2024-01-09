@@ -6,7 +6,7 @@ import { ArrowRight } from "../components/icons/ArrowRight";
 import { InformationBox } from "../components/InformationBox";
 
 import { useAccount } from "wagmi";
-import { WalletButton } from "@rainbow-me/rainbowkit";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 type Props = {
   activePage: Page;
@@ -28,15 +28,18 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
               <span>Get Started</span> <ArrowRight size="small" />
             </Button>
           ) : (
-            <WalletButton.Custom wallet="metamask">
-              {({ connect }) => {
+            <ConnectButton.Custom>
+              {({ openConnectModal }) => {
                 return (
-                  <Button onClick={connect} classes="flex items-center gap-2">
+                  <Button
+                    onClick={openConnectModal}
+                    classes="flex items-center gap-2"
+                  >
                     Connect Wallet
                   </Button>
                 );
               }}
-            </WalletButton.Custom>
+            </ConnectButton.Custom>
           )}
         </div>
         <div className="flex justify-center mt-28 mb-28 sm:mb-44 ">
