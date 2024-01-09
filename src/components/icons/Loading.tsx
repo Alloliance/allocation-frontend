@@ -13,12 +13,12 @@ export const Loading = () => (
       fy=".3125"
       gradientTransform="scale(1.5)"
     >
-      <stop offset="0" stop-color="#FF156D"></stop>
-      <stop offset=".3" stop-color="#FF156D" stop-opacity=".9"></stop>
-      <stop offset=".6" stop-color="#FF156D" stop-opacity=".6"></stop>
-      <stop offset=".8" stop-color="#FF156D" stop-opacity=".3"></stop>
-      <stop offset="1" stop-color="#FF156D" stop-opacity=".2"></stop>
-      <stop offset="1.5" stop-color="#FF156D" stop-opacity="0"></stop>
+      <stop offset="0" stop-color="#ff3380"></stop>
+      <stop offset=".3" stop-color="#ff3380" stop-opacity=".9"></stop>
+      <stop offset=".6" stop-color="#ff3380" stop-opacity=".6"></stop>
+      <stop offset=".8" stop-color="#ff3380" stop-opacity=".3"></stop>
+      <stop offset="1" stop-color="#ff3380" stop-opacity=".2"></stop>
+      <stop offset="1.5" stop-color="#ff3380" stop-opacity="0"></stop>
     </radialGradient>
     <circle
       transform-origin="center"

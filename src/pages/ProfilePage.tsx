@@ -7,6 +7,13 @@ import { Checkmark } from "../components/icons/Checkmark";
 import { Loading } from "../components/icons/Loading";
 import { PageContainer } from "../components/PageContainer";
 
+import { useAccount } from "wagmi";
+import {
+  useConnectModal,
+  useAccountModal,
+  useChainModal,
+} from '@rainbow-me/rainbowkit';
+
 export enum VERIFICATION_STATUS {
   VERIFIED,
   WAITING,
@@ -24,8 +31,11 @@ export const ProfilePage = ({
   onGoToVerifyPage,
 }: Props) => {
   const [verififcationStatus, setVerififcationStatus] = useState(
-    VERIFICATION_STATUS.WAITING
+    VERIFICATION_STATUS.NOT_VERIFIED
   );
+  const account = useAccount();
+  const { openAccountModal } = useAccountModal();
+  console.log(account)
 
   const getTranslateClass = () => {
     if (activePage === Page.Profile) return "translate-x-0";
@@ -62,7 +72,7 @@ export const ProfilePage = ({
 
   return (
     <PageContainer classes={getTranslateClass()} showSecondBlob>
-      <div className="flex text-white my-4">
+      <div className="flex text-white my-4 justify-between">
         <Button
           onClick={onGoBackToInformationPage}
           classes="flex items-center gap-3"
@@ -70,13 +80,20 @@ export const ProfilePage = ({
           <ArrowLeft size="small" />
           <span>Go back</span>
         </Button>
+        {openAccountModal ?
+          <Button
+            onClick={openAccountModal}
+            classes="flex items-center gap-3"
+          >
+            Wallet account
+          </Button> : null}
       </div>
       <div className="flex flex-col mx-auto w-full lg:w-[1000px] ">
         <h1 className="text-6xl text-right font-lato text-pink-400 text-shadow-neon mx-6 sm:mx-20 relative top-5">
           PROFILE
         </h1>
         <div className="text-pink-50 mx-4">
-          <div className="bg-black-50 rounded-lg text-white pt-8 pb-4 px-8 flex flex-col-reverse gap-2  md:flex-row md:gap-24">
+          <div className="bg-black-50 rounded-lg text-white pt-8 pb-6 px-8 flex flex-col-reverse gap-2  md:flex-row md:gap-24">
             <div className="w-full min-w-52 flex-row">
               <h4 className="text-4xl">Anders Andersson</h4>
               <div className="grid grid-cols-5 mt-8 gap-2 ">
@@ -90,8 +107,8 @@ export const ProfilePage = ({
                   rightColumn="1-955-930-5769 3247"
                 />
                 <GridRow
-                  leftColumn="Other:"
-                  rightColumn="Banana-pineapple-grapefruit"
+                  leftColumn="Connected with:"
+                  rightColumn={account.connector?.name ?? "Not found"}
                 />
               </div>
               <div className="mt-8 justify-self-end">
@@ -115,9 +132,10 @@ export const ProfilePage = ({
               </div>
             </div>
           </div>
+
           {verififcationStatus === VERIFICATION_STATUS.NOT_VERIFIED ? (
             <div className="text-xl flex justify-end relative bottom-6">
-              <Button onClick={onGoToVerifyPage}>VERIFY</Button>
+              <Button onClick={onGoToVerifyPage} size="large">VERIFY</Button>
             </div>
           ) : null}
         </div>
