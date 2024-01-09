@@ -1081,6 +1081,12 @@ code {
   background-color: rgb(79 13 48 / var(--tw-bg-opacity));
 }
 
+.hover\:from-pink-600:hover {
+  --tw-gradient-from: #db2777 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(219 39 119 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .hover\:to-pink-400:hover {
   --tw-gradient-to: #f472b6 var(--tw-gradient-to-position);
 }
