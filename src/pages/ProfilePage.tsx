@@ -76,7 +76,7 @@ export const ProfilePage = ({
           PROFILE
         </h1>
         <div className="text-pink-50 mx-4">
-          <div className="bg-black-transparent rounded-lg text-white pt-8 pb-4 px-8 flex flex-col-reverse gap-2  md:flex-row md:gap-24">
+          <div className="bg-black-50 rounded-lg text-white pt-8 pb-4 px-8 flex flex-col-reverse gap-2  md:flex-row md:gap-24">
             <div className="w-full min-w-52 flex-row">
               <h4 className="text-4xl">Anders Andersson</h4>
               <div className="grid grid-cols-5 mt-8 gap-2 ">
