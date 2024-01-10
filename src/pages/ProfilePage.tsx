@@ -9,6 +9,7 @@ import { PageContainer } from "../components/PageContainer";
 
 import { useAccount } from "wagmi";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
+import axios from "axios";
 
 export enum VERIFICATION_STATUS {
   VERIFIED,
@@ -16,11 +17,23 @@ export enum VERIFICATION_STATUS {
   NOT_VERIFIED,
 }
 
+const convertVerificationStatus = (status: string) => {
+  switch (status) {
+    case "SUCCESSFUL":
+      return VERIFICATION_STATUS.VERIFIED;
+    case "SUBMITTED":
+      return VERIFICATION_STATUS.WAITING;
+    default:
+      return VERIFICATION_STATUS.NOT_VERIFIED;
+  }
+};
+
 type Props = {
   activePage: Page;
   onGoBackToInformationPage: () => void;
   onGoToVerifyPage: () => void;
 };
+
 export const ProfilePage = ({
   activePage,
   onGoBackToInformationPage,
@@ -31,7 +44,17 @@ export const ProfilePage = ({
   );
   const account = useAccount();
   const { openAccountModal } = useAccountModal();
-  console.log(account);
+
+  /*if (account.address) {
+    axios
+      .post("https://2e00-200-61-165-188.ngrok-free.app/v1/user/status", {
+        wallet_address: account.address,
+      })
+      .then(({ data }) => {
+        console.log(data);
+        setVerififcationStatus(convertVerificationStatus(data));
+      });
+  }*/
 
   const getTranslateClass = () => {
     if (activePage === Page.Profile) return "translate-x-0";

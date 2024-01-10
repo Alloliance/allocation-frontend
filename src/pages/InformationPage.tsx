@@ -8,8 +8,7 @@ import { InformationBox } from "../components/InformationBox";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Loading } from "../components/icons/Loading";
-import { useEffect, useState } from "react";
-import { start } from "repl";
+import { useState } from "react";
 
 type Props = {
   activePage: Page;
@@ -54,16 +53,6 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
       </ConnectButton.Custom>
     );
   };
-
-  /*useEffect(() => {
-    console.log("useEffect: startedWalletConnect", startedWalletConnect);
-    console.log("useEffect: account.isConnected", account.isConnected);
-    if (account.isConnected) {
-      console.log("is now connected!");
-      setStartedWalletConnect(false);
-      onGoToProfile();
-    }
-  }, [account.isConnected]);*/
 
   return (
     <PageContainer
