@@ -126,7 +126,7 @@ export const ProfilePage = ({
   };
 
   return (
-    <PageContainer classes={getTranslateClass()} showSecondBlob>
+    <PageContainer classes={getTranslateClass()}>
       <div className="flex text-white my-4 justify-between">
         <Button
           onClick={onGoBackToInformationPage}

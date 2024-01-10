@@ -5,13 +5,13 @@ import { BlobPink } from "./svgs/BlobPink";
 type Props = {
   children: ReactNode | ReactNode[] | string;
   classes?: string;
-  showSecondBlob?: boolean;
+  secondBlobEndOfPage?: boolean;
 };
 
 export const PageContainer = ({
   children,
   classes,
-  showSecondBlob = false,
+  secondBlobEndOfPage = false,
 }: Props) => {
   return (
     <div
@@ -20,11 +20,13 @@ export const PageContainer = ({
       <div className="w-full absolute -z-10 flex justify-end">
         <BlobPink />
       </div>
-      {showSecondBlob ? (
-        <div className="w-full absolute -z-10">
-          <BlobBlue />
-        </div>
-      ) : null}
+      <div
+        className={`w-full absolute -z-10 ${
+          secondBlobEndOfPage ? "bottom-0" : ""
+        }`}
+      >
+        <BlobBlue />
+      </div>
       {children}
     </div>
   );

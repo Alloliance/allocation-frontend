@@ -18,12 +18,12 @@ type Props = {
 
 export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
   const account = useAccount();
-  const [walletConnectctionStarted, setWalletConnectctionStarted] =
+  const [walletConnectionStarted, setWalletConnectctionStarted] =
     useState(false);
 
-  const getStartButton = () => {
+  const getStartButton = (isNeonBtn = false) => {
     if (account.isConnecting) {
-      if (!walletConnectctionStarted) setWalletConnectctionStarted(true);
+      if (!walletConnectionStarted) setWalletConnectctionStarted(true);
       return (
         <Button classes="flex items-center gap-2">
           <Loading />
@@ -33,7 +33,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     }
 
     if (account.isConnected) {
-      if (walletConnectctionStarted) {
+      if (walletConnectionStarted) {
         onGoToProfile();
         setWalletConnectctionStarted(false);
       }
@@ -60,6 +60,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
       classes={
         activePage === Page.Information ? "translate-x-0" : "-translate-x-full"
       }
+      secondBlobEndOfPage
     >
       <header className="flex flex-col">
         <div className="flex justify-end text-white my-4">
@@ -74,29 +75,33 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
           </h2>
         </div>
       </header>
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col">
         <div className="flex justify-center text-center flex-wrap gap-10">
           <InformationQuadrant
             title="Web3 compliance protocol"
             subTitle="Explore the future of grant-seeking with our web3 protocol, ensuring seamless and secure grant applications."
-            button={
-              <NeonButton onClick={onGoToProfile}>Get started</NeonButton>
-            }
           />
           <InformationQuadrant
             title="Allo Protocol Magic"
             subTitle="Experience Allo Protocol transforming the KYC journey for users, ensuring a smooth and secure submission process."
-            button={
-              <NeonButton onClick={onGoToProfile}>Get started</NeonButton>
-            }
           />
           <InformationQuadrant
             title="Elevate Your Experience"
             subTitle="Enjoy a streamlined KYC journey with easy document and selfie submission, paving the path for swift grant approval."
-            button={
-              <NeonButton onClick={onGoToProfile}>Get started</NeonButton>
-            }
           />
+        </div>
+        <div className="flex justify-center text-white mt-12 mb-20">
+          <ConnectButton.Custom>
+            {({ openConnectModal }) => (
+              <Button
+                onClick={openConnectModal}
+                classes="flex items-center gap-2"
+                size="large"
+              >
+                {account.isConnected ? "Connected" : "Connect Wallet"}
+              </Button>
+            )}
+          </ConnectButton.Custom>
         </div>
         <div className="flex flex-col mx-20 gap-12">
           <InformationRectangle

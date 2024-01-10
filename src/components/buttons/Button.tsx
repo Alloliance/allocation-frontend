@@ -15,11 +15,11 @@ export const Button = ({
 }: Props) => {
   const sizeClasses = () => {
     if (size === "large") return "text-2xl px-16 py-2 ";
-    if (size === "small") return "text-xl px-8 py-2 ";
+    if (size === "small") return "px-8 py-2 ";
   };
   return (
     <button
-      className={`${sizeClasses} mx-6 rounded-full bg-gradient-to-r from-pink-700 to-pink-500 hover:from-pink-600 hover:to-pink-400 ${classes}`}
+      className={`${sizeClasses()} mx-6 rounded-full bg-gradient-to-r from-pink-700 to-pink-500 hover:from-pink-600 hover:to-pink-400 ${classes}`}
       onClick={onClick}
     >
       {children}
