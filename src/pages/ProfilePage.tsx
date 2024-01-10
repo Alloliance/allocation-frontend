@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Page } from "../App";
 import { Button } from "../components/buttons/Button";
 import { GridRow } from "../components/GridRow";
@@ -47,14 +47,39 @@ export const ProfilePage = ({
 
   /*if (account.address) {
     axios
-      .post("https://2e00-200-61-165-188.ngrok-free.app/v1/user/status", {
-        wallet_address: account.address,
-      })
+      .post(
+        "https://alloliance-server.onrender.com/v1/user/status",
+        JSON.stringify({
+          wallet_address: account.address,
+        }),
+        { headers: { "Content-Type": "application/json" } }
+      )
       .then(({ data }) => {
         console.log(data);
         setVerififcationStatus(convertVerificationStatus(data));
       });
   }*/
+
+  useEffect(() => {
+    const hej = async () => {
+      if (account.address) {
+        try {
+          const res = await axios.post(
+            "https://alloliance-server.onrender.com/v1/user/status",
+            JSON.stringify({
+              wallet_address: account.address,
+            }),
+            { headers: { "Content-Type": "application/json" } }
+          );
+          console.log(res);
+          setVerififcationStatus(convertVerificationStatus(res.data));
+        } catch (err) {
+          console.error("error in axios", err);
+        }
+      }
+    };
+    hej();
+  }, []);
 
   const getTranslateClass = () => {
     if (activePage === Page.Profile) return "translate-x-0";
