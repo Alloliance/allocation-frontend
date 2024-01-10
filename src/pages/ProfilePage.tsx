@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Page } from "../App";
 import { Button } from "../components/buttons/Button";
 import { GridRow } from "../components/GridRow";
@@ -32,16 +32,27 @@ type Props = {
   activePage: Page;
   onGoBackToInformationPage: () => void;
   onGoToVerifyPage: () => void;
+
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+
+  profile: string;
+  setProfile: Dispatch<SetStateAction<string>>;
 };
 
 export const ProfilePage = ({
   activePage,
   onGoBackToInformationPage,
   onGoToVerifyPage,
+  setEmail,
+  email,
+  setProfile,
+  profile,
 }: Props) => {
   const [verififcationStatus, setVerififcationStatus] = useState(
     VERIFICATION_STATUS.NOT_VERIFIED
   );
+
   const account = useAccount();
   const { openAccountModal } = useAccountModal();
 
@@ -139,26 +150,38 @@ export const ProfilePage = ({
             <div className="w-full min-w-52 flex-row">
               <h4 className="text-4xl">Anders Andersson</h4>
               <div className="grid grid-cols-5 mt-8 gap-2 ">
-                <GridRow leftColumn="Address:" rightColumn="123-456-789" />
                 <GridRow
                   leftColumn="Email:"
-                  rightColumn="anders@andersson.com"
-                />
-                <GridRow
-                  leftColumn="Phone number:"
-                  rightColumn="1-955-930-5769 3247"
+                  rightColumn={
+                    <input
+                      type="email"
+                      value={email}
+                      placeholder="anders@andersson.com"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  }
                 />
                 <GridRow
                   leftColumn="Connected with:"
                   rightColumn={account.connector?.name ?? "Not found"}
                 />
+                <GridRow
+                  leftColumn="Profile Id:"
+                  rightColumn={
+                    <input
+                      type="text"
+                      value={profile}
+                      placeholder="0x3078e6f83e3f3e6f3e6f36e63f30e63f36e5366336633666323037343635373"
+                      onChange={(e) => setProfile(e.target.value)}
+                    />
+                  }
+                />
               </div>
               <div className="mt-8 justify-self-end">
-                <p>
-                  bunch on profile information, and more, and more, and more,
-                  and MORE, aaaand MOOOORE!
-                </p>
-                <p>And now it has ended.</p>
+                <p>1. Connect your wallet</p>
+                <p>2. Enter your email address</p>
+                <p>3. Enter your Allo profile ID</p>
+                <p>4. Start your KYC application</p>
               </div>
             </div>
             <div className="md:m-10 md:my-auto mb-0 flex flex-col md:items-center sm:items-end  items-center md:relative md:bottom-6">

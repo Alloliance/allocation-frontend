@@ -8,8 +8,15 @@ import { useAccount } from "wagmi";
 type Props = {
   activePage: Page;
   onGoBackToProfilePage: () => void;
+  email: string;
+  profile: string;
 };
-export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
+export const VerifyPage = ({
+  activePage,
+  onGoBackToProfilePage,
+  email,
+  profile,
+}: Props) => {
   const [animationFinished, setAnimationFinished] = useState(false);
   const account = useAccount();
 
@@ -20,6 +27,8 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
           ...ballerineConfig,
           endUserInfo: {
             id: account.address?.toString(),
+            phone: profile,
+            email: email,
           },
         })
         .then(() => {
