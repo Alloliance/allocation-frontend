@@ -8,11 +8,7 @@ import { Loading } from "../components/icons/Loading";
 import { PageContainer } from "../components/PageContainer";
 
 import { useAccount } from "wagmi";
-import {
-  useConnectModal,
-  useAccountModal,
-  useChainModal,
-} from '@rainbow-me/rainbowkit';
+import { useAccountModal } from "@rainbow-me/rainbowkit";
 
 export enum VERIFICATION_STATUS {
   VERIFIED,
@@ -35,7 +31,7 @@ export const ProfilePage = ({
   );
   const account = useAccount();
   const { openAccountModal } = useAccountModal();
-  console.log(account)
+  console.log(account);
 
   const getTranslateClass = () => {
     if (activePage === Page.Profile) return "translate-x-0";
@@ -80,13 +76,11 @@ export const ProfilePage = ({
           <ArrowLeft size="small" />
           <span>Go back</span>
         </Button>
-        {openAccountModal ?
-          <Button
-            onClick={openAccountModal}
-            classes="flex items-center gap-3"
-          >
+        {openAccountModal ? (
+          <Button onClick={openAccountModal} classes="flex items-center gap-3">
             Wallet account
-          </Button> : null}
+          </Button>
+        ) : null}
       </div>
       <div className="flex flex-col mx-auto w-full lg:w-[1000px] ">
         <h1 className="text-6xl text-right font-lato text-pink-400 text-shadow-neon mx-6 sm:mx-20 relative top-5">
@@ -135,7 +129,9 @@ export const ProfilePage = ({
 
           {verififcationStatus === VERIFICATION_STATUS.NOT_VERIFIED ? (
             <div className="text-xl flex justify-end relative bottom-6">
-              <Button onClick={onGoToVerifyPage} size="large">VERIFY</Button>
+              <Button onClick={onGoToVerifyPage} size="large">
+                VERIFY
+              </Button>
             </div>
           ) : null}
         </div>

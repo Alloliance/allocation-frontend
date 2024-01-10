@@ -17,27 +17,31 @@ type Props = {
 export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
   const account = useAccount();
 
+  // add state that keeps track of connecting,
+  // add useEffect that triggers when account.isconnected is changed.
+  // When state is connecting but it changes to isConnected - trigger move to profile page
+
   const customConnectWalletButton = ({
     account,
     chain,
     openConnectModal,
     authenticationStatus,
-    mounted
+    mounted,
   }: any) => {
-    console.log("customConnectWalletButton")
-    console.log("account", account)
-    console.log("chain", chain)
-    console.log("authenticationStatus", authenticationStatus)
-    console.log("mounted", mounted)
-    const loading = authenticationStatus === 'loading';
+    console.log("customConnectWalletButton");
+    console.log("account", account);
+    console.log("chain", chain);
+    console.log("authenticationStatus", authenticationStatus);
+    console.log("mounted", mounted);
+    const loading = authenticationStatus === "loading";
     if (loading) {
-      console.log("LOADING")
-      return <Button
-        onClick={openConnectModal}
-        classes="flex items-center gap-2"
-      >
-        <Loading /><span>Connecting..</span>
-      </Button>
+      console.log("LOADING");
+      return (
+        <Button onClick={openConnectModal} classes="flex items-center gap-2">
+          <Loading />
+          <span>Connecting..</span>
+        </Button>
+      );
     }
 
     const ready = mounted && !loading;
@@ -45,42 +49,40 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
       ready &&
       account &&
       chain &&
-      (!authenticationStatus ||
-        authenticationStatus === 'authenticated');
+      (!authenticationStatus || authenticationStatus === "authenticated");
 
     if (connected) {
-      console.log("DONE!")
+      console.log("DONE!");
       onGoToProfile();
     }
 
     return (
-      <Button
-        onClick={openConnectModal}
-        classes="flex items-center gap-2"
-      >
+      <Button onClick={openConnectModal} classes="flex items-center gap-2">
         Connect Wallet
       </Button>
     );
-  }
+  };
 
   const getStartButton = () => {
     if (account.isConnecting)
-      return <Button
-        onClick={() => { }}
-        classes="flex items-center gap-2"
-      >
-        <Loading /><span>Connecting..</span>
-      </Button>
+      return (
+        <Button onClick={() => {}} classes="flex items-center gap-2">
+          <Loading />
+          <span>Connecting..</span>
+        </Button>
+      );
 
     if (account.isConnected)
-      return <Button onClick={onGoToProfile} classes="flex items-center gap-2">
-        <span>To your profile</span> <ArrowRight size="small" />
-      </Button>
+      return (
+        <Button onClick={onGoToProfile} classes="flex items-center gap-2">
+          <span>To your profile</span> <ArrowRight size="small" />
+        </Button>
+      );
 
-    return <ConnectButton.Custom>
-      {customConnectWalletButton}
-    </ConnectButton.Custom>
-  }
+    return (
+      <ConnectButton.Custom>{customConnectWalletButton}</ConnectButton.Custom>
+    );
+  };
 
   return (
     <PageContainer

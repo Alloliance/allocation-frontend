@@ -12,9 +12,16 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
   const [animationFinished, setAnimationFinished] = useState(false);
 
   const startBallerineFlow = async () => {
-    await ballerineFlows.init(ballerineConfig).then(() => {
-      console.log("flow is ready!");
-    });
+    await ballerineFlows
+      .init({
+        ...ballerineConfig,
+        endUserInfo: {
+          id: "",
+        },
+      })
+      .then(() => {
+        console.log("flow is ready!");
+      });
     ballerineFlows.mount({
       flowName: "my-kyc-flow",
       useModal: false,
