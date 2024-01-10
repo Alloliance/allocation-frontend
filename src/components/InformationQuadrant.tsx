@@ -5,7 +5,7 @@ type Props = {
   subTitle: string;
   button?: ReactNode;
 };
-export const InformationBox = ({ title, subTitle, button }: Props) => {
+export const InformationQuadrant = ({ title, subTitle, button }: Props) => {
   return (
     <div className=" max-w-80 px-3 py-6">
       <h4 className="text-pink-400 text-shadow-neon mb-4 text-xl">{title}</h4>

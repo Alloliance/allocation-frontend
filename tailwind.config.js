@@ -10,8 +10,8 @@ module.exports = {
       },
       keyframes: {
         hover: {
-          "0%, 100%": { transform: "translatey(0px) rotate(0deg)" },
-          "50%": { transform: "translatey(-15px) rotate(-1deg)" },
+          "0%, 100%": { transform: "translatey(0px)" },
+          "50%": { transform: "translatey(-15px)" },
         },
       },
       fontFamily: {
@@ -19,9 +19,9 @@ module.exports = {
       },
       backgroundColor: {
         black: {
-          "100": "#000000",
-          "90": "#000000e6",
-          "50": "#00000073",
+          100: "#000000",
+          90: "#000000e6",
+          50: "#00000073",
         },
       },
       colors: {
