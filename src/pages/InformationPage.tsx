@@ -155,9 +155,9 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
           </a>
           <a
             className="text-white hover:text-pink-300"
-            href="https://github.com/ajosdeme"
+            href="https://github.com/lajosdeme"
           >
-            ajosdeme
+            lajosdeme
           </a>
         </div>
       </div>
