@@ -1,7 +1,7 @@
 export const BlobPink = () => (
   <svg
-    className=" w-lvw"
-    viewBox="-400 -120 1000 1000"
+    className="w-[100vw] sm:w-[85vw] lg:w-[75vw]"
+    viewBox="-50 0 600 500"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >

@@ -29,10 +29,12 @@ function App() {
             onGoBackToInformationPage={() => setPage(Page.Information)}
             onGoToVerifyPage={() => setPage(Page.Verify)}
           />
-          <VerifyPage
-            activePage={page}
-            onGoBackToProfilePage={() => setPage(Page.Profile)}
-          />
+          {page === Page.Verify ? (
+            <VerifyPage
+              activePage={page}
+              onGoBackToProfilePage={() => setPage(Page.Profile)}
+            />
+          ) : null}
         </div>
       </RainbowKitProvider>
     </WagmiConfig>

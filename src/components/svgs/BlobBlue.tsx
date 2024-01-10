@@ -1,7 +1,7 @@
 export const BlobBlue = () => (
   <svg
-    className=" w-lvw"
-    viewBox="-200 -200 1000 1000"
+    className=""
+    viewBox="-200 0 1000 600"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >

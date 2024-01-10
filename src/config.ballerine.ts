@@ -1,15 +1,12 @@
 export default {
-  endUserInfo: {
-    id: "test-id",
-  },
   backendConfig: {
-    baseUrl: 'https://2e00-200-61-165-188.ngrok-free.app',
+    baseUrl: "https://alloliance-server.onrender.com",
     endpoints: {
-      startVerification: "/test",
-      getVerificationStatus: "/test",
+      startVerification: "/v1/user/submit",
+      getVerificationStatus: "/v1/user/status",
       processStepData: "/test",
-      getConfig: "/test"
-    }
+      getConfig: "/test",
+    },
   },
   uiConfig: {
     //uiPack: "default",

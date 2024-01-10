@@ -3,6 +3,7 @@ import { flows as ballerineFlows } from "@ballerine/web-sdk";
 import ballerineConfig from "../config.ballerine";
 import { useEffect, useState } from "react";
 import { Close } from "../components/icons/Close";
+import { useAccount } from "wagmi";
 
 type Props = {
   activePage: Page;
@@ -10,20 +11,29 @@ type Props = {
 };
 export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
   const [animationFinished, setAnimationFinished] = useState(false);
+  const account = useAccount();
 
   const startBallerineFlow = async () => {
-    await ballerineFlows.init(ballerineConfig).then(() => {
-      console.log("flow is ready!");
-    });
-    ballerineFlows.mount({
-      flowName: "my-kyc-flow",
-      useModal: false,
-      elementId: "my-kyc-flow",
-    });
-    // 3. Mount selected flow on an element
-    // ballerineFlows.mount("my-kyc-flow", "flow-host-element", {});
-    // 4. Listen to finish event (see events)
-    // ballerineFlows.on("finish", doSomethingFn);
+    if (account.address) {
+      await ballerineFlows
+        .init({
+          ...ballerineConfig,
+          endUserInfo: {
+            id: account.address?.toString(),
+          },
+        })
+        .then(() => {
+          console.log("flow is ready!");
+        });
+      ballerineFlows.mount({
+        flowName: "my-kyc-flow",
+        useModal: false,
+        elementId: "my-kyc-flow",
+      });
+    }
+    console.error(
+      "Could not inisiate Ballerine flow because users wallet address is missing."
+    );
   };
 
   useEffect(() => {
@@ -58,8 +68,3 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
     </div>
   );
 };
-
-/**
- * <ArrowUp onClick={onGoBackToProfilePage} size="large" />
-      <div id="my-kyc-flow" />
- */

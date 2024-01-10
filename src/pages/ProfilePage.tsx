@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Page } from "../App";
 import { Button } from "../components/buttons/Button";
 import { GridRow } from "../components/GridRow";
@@ -8,11 +8,8 @@ import { Loading } from "../components/icons/Loading";
 import { PageContainer } from "../components/PageContainer";
 
 import { useAccount } from "wagmi";
-import {
-  useConnectModal,
-  useAccountModal,
-  useChainModal,
-} from '@rainbow-me/rainbowkit';
+import { useAccountModal } from "@rainbow-me/rainbowkit";
+import axios from "axios";
 
 export enum VERIFICATION_STATUS {
   VERIFIED,
@@ -20,11 +17,23 @@ export enum VERIFICATION_STATUS {
   NOT_VERIFIED,
 }
 
+const convertVerificationStatus = (status: string) => {
+  switch (status) {
+    case "SUCCESSFUL":
+      return VERIFICATION_STATUS.VERIFIED;
+    case "SUBMITTED":
+      return VERIFICATION_STATUS.WAITING;
+    default:
+      return VERIFICATION_STATUS.NOT_VERIFIED;
+  }
+};
+
 type Props = {
   activePage: Page;
   onGoBackToInformationPage: () => void;
   onGoToVerifyPage: () => void;
 };
+
 export const ProfilePage = ({
   activePage,
   onGoBackToInformationPage,
@@ -35,7 +44,42 @@ export const ProfilePage = ({
   );
   const account = useAccount();
   const { openAccountModal } = useAccountModal();
-  console.log(account)
+
+  /*if (account.address) {
+    axios
+      .post(
+        "https://alloliance-server.onrender.com/v1/user/status",
+        JSON.stringify({
+          wallet_address: account.address,
+        }),
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then(({ data }) => {
+        console.log(data);
+        setVerififcationStatus(convertVerificationStatus(data));
+      });
+  }*/
+
+  useEffect(() => {
+    const hej = async () => {
+      if (account.address) {
+        try {
+          const res = await axios.post(
+            "https://alloliance-server.onrender.com/v1/user/status",
+            JSON.stringify({
+              wallet_address: account.address,
+            }),
+            { headers: { "Content-Type": "application/json" } }
+          );
+          console.log(res);
+          setVerififcationStatus(convertVerificationStatus(res.data));
+        } catch (err) {
+          console.error("error in axios", err);
+        }
+      }
+    };
+    hej();
+  }, []);
 
   const getTranslateClass = () => {
     if (activePage === Page.Profile) return "translate-x-0";
@@ -80,13 +124,11 @@ export const ProfilePage = ({
           <ArrowLeft size="small" />
           <span>Go back</span>
         </Button>
-        {openAccountModal ?
-          <Button
-            onClick={openAccountModal}
-            classes="flex items-center gap-3"
-          >
+        {openAccountModal ? (
+          <Button onClick={openAccountModal} classes="flex items-center gap-3">
             Wallet account
-          </Button> : null}
+          </Button>
+        ) : null}
       </div>
       <div className="flex flex-col mx-auto w-full lg:w-[1000px] ">
         <h1 className="text-6xl text-right font-lato text-pink-400 text-shadow-neon mx-6 sm:mx-20 relative top-5">
@@ -135,7 +177,9 @@ export const ProfilePage = ({
 
           {verififcationStatus === VERIFICATION_STATUS.NOT_VERIFIED ? (
             <div className="text-xl flex justify-end relative bottom-6">
-              <Button onClick={onGoToVerifyPage} size="large">VERIFY</Button>
+              <Button onClick={onGoToVerifyPage} size="large">
+                VERIFY
+              </Button>
             </div>
           ) : null}
         </div>

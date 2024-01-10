@@ -8,6 +8,7 @@ import { InformationBox } from "../components/InformationBox";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Loading } from "../components/icons/Loading";
+import { useState } from "react";
 
 type Props = {
   activePage: Page;
@@ -16,45 +17,42 @@ type Props = {
 
 export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
   const account = useAccount();
+  const [walletConnectctionStarted, setWalletConnectctionStarted] =
+    useState(false);
 
-  const customConnectWalletButton = ({
-    account,
-    chain,
-    openConnectModal,
-    authenticationStatus,
-    mounted
-  }: any) => {
-    const loading = authenticationStatus === 'loading';
-    if (loading) {
-      return <Button
-        onClick={openConnectModal}
-        classes="flex items-center gap-2"
-      >
-        <Loading /><span>Connecting..</span>
-      </Button>
+  const getStartButton = () => {
+    if (account.isConnecting) {
+      if (!walletConnectctionStarted) setWalletConnectctionStarted(true);
+      return (
+        <Button classes="flex items-center gap-2">
+          <Loading />
+          <span>Connecting..</span>
+        </Button>
+      );
     }
 
-    const ready = mounted && !loading;
-    const connected =
-      ready &&
-      account &&
-      chain &&
-      (!authenticationStatus ||
-        authenticationStatus === 'authenticated');
-
-    if (connected) {
-      onGoToProfile();
+    if (account.isConnected) {
+      if (walletConnectctionStarted) {
+        onGoToProfile();
+        setWalletConnectctionStarted(false);
+      }
+      return (
+        <Button onClick={onGoToProfile} classes="flex items-center gap-2">
+          <span>To your profile</span> <ArrowRight size="small" />
+        </Button>
+      );
     }
 
     return (
-      <Button
-        onClick={openConnectModal}
-        classes="flex items-center gap-2"
-      >
-        Connect Wallet
-      </Button>
+      <ConnectButton.Custom>
+        {({ openConnectModal }) => (
+          <Button onClick={openConnectModal} classes="flex items-center gap-2">
+            Connect Wallet
+          </Button>
+        )}
+      </ConnectButton.Custom>
     );
-  }
+  };
 
   return (
     <PageContainer
@@ -64,15 +62,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     >
       <header className="flex flex-col">
         <div className="flex justify-end text-white my-4">
-          {account.isConnected ? (
-            <Button onClick={onGoToProfile} classes="flex items-center gap-2">
-              <span>To your profile</span> <ArrowRight size="small" />
-            </Button>
-          ) : (
-            <ConnectButton.Custom>
-              {customConnectWalletButton}
-            </ConnectButton.Custom>
-          )}
+          {getStartButton()}
         </div>
         <div className="flex justify-center mt-28 mb-28 sm:mb-44 ">
           <h1 className="text-6xl font-lato text-pink-400 text-shadow-neon animate-hover sm:text-7xl">

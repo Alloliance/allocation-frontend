@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 type Props = {
   children: ReactNode | ReactNode[] | string;
   size?: "large" | "small";
-  onClick: () => void;
+  onClick?: () => void;
   classes?: string;
 };
 
