@@ -12,7 +12,6 @@ type Props = {
 export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
   const [animationFinished, setAnimationFinished] = useState(false);
   const account = useAccount();
-  console.log(account);
 
   const startBallerineFlow = async () => {
     if (account.address) {
@@ -69,8 +68,3 @@ export const VerifyPage = ({ activePage, onGoBackToProfilePage }: Props) => {
     </div>
   );
 };
-
-/**
- * <ArrowUp onClick={onGoBackToProfilePage} size="large" />
-      <div id="my-kyc-flow" />
- */
