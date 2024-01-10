@@ -15,6 +15,8 @@ export enum Page {
 
 function App() {
   const [page, setPage] = useState(Page.Information);
+  const [profileInputValue, setProfileInputValue] = useState("");
+  const [emailInputValue, setEmailInputValue] = useState("");
 
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -28,11 +30,17 @@ function App() {
             activePage={page}
             onGoBackToInformationPage={() => setPage(Page.Information)}
             onGoToVerifyPage={() => setPage(Page.Verify)}
+			setEmail={setEmailInputValue}
+			email={emailInputValue}
+			setProfile={setProfileInputValue}
+			profile={profileInputValue}
           />
           {page === Page.Verify ? (
             <VerifyPage
               activePage={page}
               onGoBackToProfilePage={() => setPage(Page.Profile)}
+			  email={emailInputValue}
+			  profile={profileInputValue}
             />
           ) : null}
         </div>

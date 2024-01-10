@@ -1,6 +1,6 @@
 type Props = {
   leftColumn: string;
-  rightColumn: string;
+  rightColumn: React.ReactNode | string;
 };
 
 export const GridRow = ({ leftColumn, rightColumn }: Props) => (
