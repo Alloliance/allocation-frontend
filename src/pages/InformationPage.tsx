@@ -24,8 +24,14 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     authenticationStatus,
     mounted
   }: any) => {
+    console.log("customConnectWalletButton")
+    console.log("account", account)
+    console.log("chain", chain)
+    console.log("authenticationStatus", authenticationStatus)
+    console.log("mounted", mounted)
     const loading = authenticationStatus === 'loading';
     if (loading) {
+      console.log("LOADING")
       return <Button
         onClick={openConnectModal}
         classes="flex items-center gap-2"
@@ -43,6 +49,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
         authenticationStatus === 'authenticated');
 
     if (connected) {
+      console.log("DONE!")
       onGoToProfile();
     }
 
@@ -56,6 +63,25 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     );
   }
 
+  const getStartButton = () => {
+    if (account.isConnecting)
+      return <Button
+        onClick={() => { }}
+        classes="flex items-center gap-2"
+      >
+        <Loading /><span>Connecting..</span>
+      </Button>
+
+    if (account.isConnected)
+      return <Button onClick={onGoToProfile} classes="flex items-center gap-2">
+        <span>To your profile</span> <ArrowRight size="small" />
+      </Button>
+
+    return <ConnectButton.Custom>
+      {customConnectWalletButton}
+    </ConnectButton.Custom>
+  }
+
   return (
     <PageContainer
       classes={
@@ -64,15 +90,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     >
       <header className="flex flex-col">
         <div className="flex justify-end text-white my-4">
-          {account.isConnected ? (
-            <Button onClick={onGoToProfile} classes="flex items-center gap-2">
-              <span>To your profile</span> <ArrowRight size="small" />
-            </Button>
-          ) : (
-            <ConnectButton.Custom>
-              {customConnectWalletButton}
-            </ConnectButton.Custom>
-          )}
+          {getStartButton()}
         </div>
         <div className="flex justify-center mt-28 mb-28 sm:mb-44 ">
           <h1 className="text-6xl font-lato text-pink-400 text-shadow-neon animate-hover sm:text-7xl">
