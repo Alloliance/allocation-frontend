@@ -1,4 +1,11 @@
-import { ReactNode } from "react";
+import {
+  forwardRef,
+  LegacyRef,
+  MutableRefObject,
+  ReactNode,
+  Ref,
+  useEffect,
+} from "react";
 import { BlobBlue } from "./svgs/BlobBlue";
 import { BlobPink } from "./svgs/BlobPink";
 
@@ -8,14 +15,14 @@ type Props = {
   secondBlobEndOfPage?: boolean;
 };
 
-export const PageContainer = ({
-  children,
-  classes,
-  secondBlobEndOfPage = false,
-}: Props) => {
+export const PageContainer = forwardRef(function (
+  { children, classes, secondBlobEndOfPage = false }: Props,
+  ref: any
+) {
   return (
     <div
-      className={` w-screen absolute transition-all duration-700 ${classes} bg-gradient-to-b from-purple-900 from-30% to-black `}
+      ref={ref}
+      className={`w-screen absolute transition-all duration-700 ${classes} bg-gradient-to-b from-purple-900 from-30% to-black `}
     >
       <div className="w-full absolute -z-10 flex justify-end">
         <BlobPink />
@@ -30,4 +37,4 @@ export const PageContainer = ({
       {children}
     </div>
   );
-};
+});

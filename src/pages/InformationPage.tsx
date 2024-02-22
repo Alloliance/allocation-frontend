@@ -67,7 +67,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
         <div className="flex justify-end text-white my-4">
           {getStartButton()}
         </div>
-        <div className="flex flex-col items-center mt-28 mb-28 sm:mb-38 animate-hover">
+        <div className="flex flex-col items-center mt-28 mb-28 sm:mb-38 animate-hover text-center my-5">
           <h1 className="text-6xl font-lato text-pink-400 text-shadow-neon  mb-12 sm:text-7xl">
             ALLOLIANCE
           </h1>
@@ -77,7 +77,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
         </div>
       </header>
       <div className="flex flex-col">
-        <div className="flex justify-center text-center flex-wrap gap-10">
+        <div className="flex justify-center text-center flex-wrap sm:gap-10 ">
           <InformationQuadrant
             title="Web3 compliance protocol"
             subTitle="Explore the future of grant-seeking with our web3 protocol, ensuring seamless and secure grant applications."
@@ -104,7 +104,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
             )}
           </ConnectButton.Custom>
         </div>
-        <div className="flex flex-col mx-20 gap-12">
+        <div className="flex flex-col mx-3 sm:mx-20 gap-12">
           <InformationRectangle
             imageSrc="https://www.svgrepo.com/show/1320/rocket.svg"
             title="Roadmap to KYC Success: Approvals and Beyond"

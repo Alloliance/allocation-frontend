@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Page } from "../App";
 import { Button } from "../components/buttons/Button";
 import { GridRow } from "../components/GridRow";
@@ -52,27 +59,13 @@ export const ProfilePage = ({
   const [verififcationStatus, setVerififcationStatus] = useState(
     VERIFICATION_STATUS.NOT_VERIFIED
   );
+  const animationRef = useRef<HTMLElement | null>(null);
 
   const account = useAccount();
   const { openAccountModal } = useAccountModal();
 
-  /*if (account.address) {
-    axios
-      .post(
-        "https://alloliance-server.onrender.com/v1/user/status",
-        JSON.stringify({
-          wallet_address: account.address,
-        }),
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(({ data }) => {
-        console.log(data);
-        setVerififcationStatus(convertVerificationStatus(data));
-      });
-  }*/
-
   useEffect(() => {
-    const hej = async () => {
+    const getStatus = async () => {
       if (account.address) {
         try {
           const res = await axios.post(
@@ -82,20 +75,38 @@ export const ProfilePage = ({
             }),
             { headers: { "Content-Type": "application/json" } }
           );
-          console.log(res);
           setVerififcationStatus(convertVerificationStatus(res.data));
         } catch (err) {
           console.error("error in axios", err);
         }
       }
     };
-    hej();
+    getStatus();
   }, []);
 
+  /*useEffect(() => {
+    console.log("animationRef updated", animationRef.current);
+    const ref = animationRef?.current;
+    if (ref) {
+      console.log(ref.className);
+      setTimeout(() => {
+        ref.className = ref.className.replace(
+          "translate-x-full",
+          "translate-x-0"
+        );
+      }, 1);
+    }
+  }, [animationRef]);*/
+
   const getTranslateClass = () => {
-    if (activePage === Page.Profile) return "translate-x-0";
-    if (activePage === Page.Verify) return "translate-x-0";
-    return "translate-x-full";
+    //return "translate-x-full ";
+    switch (activePage) {
+      case Page.Profile:
+      case Page.Verify:
+        return "translate-x-0 ";
+      default:
+        return "translate-x-full ";
+    }
   };
 
   const getVerifiedStatus = () => {
@@ -126,8 +137,8 @@ export const ProfilePage = ({
   };
 
   return (
-    <PageContainer classes={getTranslateClass()}>
-      <div className="flex text-white my-4 justify-between">
+    <PageContainer classes={getTranslateClass()} ref={animationRef}>
+      <div className="flex text-white my-4 justify-between ">
         <Button
           onClick={onGoBackToInformationPage}
           classes="flex items-center gap-3"

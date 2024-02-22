@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import { useState } from "react";
+
 import { InformationPage } from "./pages/InformationPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { VerifyPage } from "./pages/VerifyPage";
@@ -30,17 +30,17 @@ function App() {
             activePage={page}
             onGoBackToInformationPage={() => setPage(Page.Information)}
             onGoToVerifyPage={() => setPage(Page.Verify)}
-			setEmail={setEmailInputValue}
-			email={emailInputValue}
-			setProfile={setProfileInputValue}
-			profile={profileInputValue}
+            setEmail={setEmailInputValue}
+            email={emailInputValue}
+            setProfile={setProfileInputValue}
+            profile={profileInputValue}
           />
           {page === Page.Verify ? (
             <VerifyPage
               activePage={page}
               onGoBackToProfilePage={() => setPage(Page.Profile)}
-			  email={emailInputValue}
-			  profile={profileInputValue}
+              email={emailInputValue}
+              profile={profileInputValue}
             />
           ) : null}
         </div>
