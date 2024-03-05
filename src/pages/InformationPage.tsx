@@ -26,7 +26,7 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     if (account.isConnecting) {
       if (!walletConnectionStarted) setWalletConnectctionStarted(true);
       return (
-        <Button classes="flex items-center gap-2">
+        <Button classes="flex items-center gap-2 px-8 py-2">
           <Loading />
           <span>Connecting..</span>
         </Button>
@@ -39,7 +39,10 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
         setWalletConnectctionStarted(false);
       }
       return (
-        <Button onClick={onGoToProfile} classes="flex items-center gap-2">
+        <Button
+          onClick={onGoToProfile}
+          classes="flex items-center gap-2 px-8 py-2"
+        >
           <span>To your profile</span> <ArrowRight size="small" />
         </Button>
       );
@@ -48,7 +51,10 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     return (
       <ConnectButton.Custom>
         {({ openConnectModal }) => (
-          <Button onClick={openConnectModal} classes="flex items-center gap-2">
+          <Button
+            onClick={openConnectModal}
+            classes="flex items-center gap-2 px-8 py-2"
+          >
             Connect Wallet
           </Button>
         )}
@@ -98,8 +104,9 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
                 onClick={openConnectModal}
                 classes="flex items-center gap-2"
                 size="large"
+                disabled={account.isConnected}
               >
-                {account.isConnected ? "Connected" : "Connect Wallet"}
+                {account.isConnected ? "Already Connected" : "Connect Wallet"}
               </Button>
             )}
           </ConnectButton.Custom>
