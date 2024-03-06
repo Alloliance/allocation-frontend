@@ -23,14 +23,13 @@ function App() {
   useEffect(() => {
     console.log("page changed to", currentPage, "from", previousPage);
     //setStartAnimation(true);
-    setAnimationDone(false);
     if (currentPage !== previousPage) {
       setTimeout(() => {
         console.log("animation done!");
         setAnimationDone(true);
-      }, 700);
+      }, 701);
     }
-  }, [currentPage]);
+  }, [currentPage, previousPage]);
 
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -42,17 +41,19 @@ function App() {
               activePage={currentPage}
               previousPage={previousPage}
               onGoToProfile={() => {
+                setAnimationDone(false);
                 setCurrentPage(Page.Profile);
                 setPreviousPage(Page.Information);
               }}
             />
           ) : null}
-          {currentPage === Page.Profile ||
+          {currentPage === (Page.Profile || Page.Verify) ||
           (previousPage === Page.Profile && !animationDone) ? (
             <ProfilePage
               activePage={currentPage}
               previousPage={previousPage}
               onGoBackToInformationPage={() => {
+                setAnimationDone(false);
                 setCurrentPage(Page.Information);
                 setPreviousPage(Page.Profile);
               }}
