@@ -57,7 +57,9 @@ function App() {
                 setCurrentPage(Page.Information);
                 setPreviousPage(Page.Profile);
               }}
-              onGoToVerifyPage={() => setCurrentPage(Page.Verify)}
+              onGoToVerifyPage={() => {
+                setCurrentPage(Page.Verify);
+              }}
               setEmail={setEmailInputValue}
               email={emailInputValue}
               setProfile={setProfileInputValue}

@@ -63,7 +63,9 @@ export const ProfilePage = ({
   );
   const [startAnimation, setStartAnimation] = useState(false);
   const [showClass, setShowClass] = useState(
-    previousPage === Page.Profile ? "translate-x-0" : "translate-x-full"
+    activePage === (Page.Profile || Page.Verify)
+      ? "translate-x-full"
+      : "translate-x-0"
   );
   const animationRef = useRef<HTMLElement | null>(null);
 
@@ -105,7 +107,7 @@ export const ProfilePage = ({
       console.log("previousPage:", previousPage);
       console.log("from class:", showClass);
       // Active page and animation has started/component has loaded = change so that it shows
-      if (activePage === Page.Profile) {
+      if (activePage === (Page.Profile || Page.Verify)) {
         setShowClass("translate-x-0");
       }
       if (previousPage === Page.Profile) {
