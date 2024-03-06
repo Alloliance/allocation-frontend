@@ -51,6 +51,7 @@ function App() {
           (previousPage === Page.Profile && !animationDone) ? (
             <ProfilePage
               activePage={currentPage}
+              previousPage={previousPage}
               onGoBackToInformationPage={() => {
                 setCurrentPage(Page.Information);
                 setPreviousPage(Page.Profile);

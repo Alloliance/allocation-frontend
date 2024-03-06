@@ -77,17 +77,21 @@ export const InformationPage = ({
   }, []);
 
   useEffect(() => {
-    console.log(
-      "Inside Information page: activePage, previousPage has been updated"
-    );
-    // Active page and animation has started/component has loaded = change so that it shows
-    if (activePage === Page.Information && startAnimation) {
-      setShowClass("translate-x-0");
+    if (activePage !== previousPage) {
+      if (startAnimation) {
+        console.log(
+          "Inside Information page: activePage, previousPage has been updated"
+        );
+        // Active page and animation has started/component has loaded = change so that it shows
+        if (activePage === Page.Information) {
+          setShowClass("translate-x-0");
+        }
+        if (previousPage === Page.Information) {
+          setShowClass("-translate-x-full");
+        }
+      }
     }
-    if (previousPage === Page.Information && startAnimation) {
-      setShowClass("-translate-x-full");
-    }
-  }, [activePage, previousPage]);
+  }, [activePage, previousPage, startAnimation]);
 
   return (
     <PageContainer classes={showClass} secondBlobEndOfPage>
