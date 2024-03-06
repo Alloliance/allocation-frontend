@@ -8,19 +8,28 @@ import { InformationQuadrant } from "../components/InformationQuadrant";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Loading } from "../components/icons/Loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InformationRectangle } from "../components/InformationRectangle";
 import { Footer } from "../components/Footer";
 
 type Props = {
   activePage: Page;
+  previousPage: Page;
   onGoToProfile: () => void;
 };
 
-export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
+export const InformationPage = ({
+  activePage,
+  previousPage,
+  onGoToProfile,
+}: Props) => {
   const account = useAccount();
   const [walletConnectionStarted, setWalletConnectctionStarted] =
     useState(false);
+  const [startAnimation, setStartAnimation] = useState(false);
+  const [showClass, setShowClass] = useState(
+    previousPage === Page.Information ? "translate-x-0" : "-translate-x-full"
+  );
 
   const getStartButton = (isNeonBtn = false) => {
     if (account.isConnecting) {
@@ -62,13 +71,26 @@ export const InformationPage = ({ activePage, onGoToProfile }: Props) => {
     );
   };
 
+  useEffect(() => {
+    console.log("loaded information page - start animation");
+    setStartAnimation(true);
+  }, []);
+
+  useEffect(() => {
+    console.log(
+      "Inside Information page: activePage, previousPage has been updated"
+    );
+    // Active page and animation has started/component has loaded = change so that it shows
+    if (activePage === Page.Information && startAnimation) {
+      setShowClass("translate-x-0");
+    }
+    if (previousPage === Page.Information && startAnimation) {
+      setShowClass("-translate-x-full");
+    }
+  }, [activePage, previousPage]);
+
   return (
-    <PageContainer
-      classes={
-        activePage === Page.Information ? "translate-x-0" : "-translate-x-full"
-      }
-      secondBlobEndOfPage
-    >
+    <PageContainer classes={showClass} secondBlobEndOfPage>
       <header className="flex flex-col">
         <div className="flex justify-end text-white my-4">
           {getStartButton()}

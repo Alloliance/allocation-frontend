@@ -59,6 +59,7 @@ export const ProfilePage = ({
   const [verififcationStatus, setVerififcationStatus] = useState(
     VERIFICATION_STATUS.NOT_VERIFIED
   );
+  const [startAnimation, setStartAnimation] = useState(false);
   const animationRef = useRef<HTMLElement | null>(null);
 
   const account = useAccount();
@@ -98,7 +99,12 @@ export const ProfilePage = ({
     }
   }, [animationRef]);*/
 
-  const getTranslateClass = () => {
+  useEffect(() => {
+    console.log("loaded profile page - start animation");
+    setStartAnimation(true);
+  }, []);
+
+  /*const getTranslateClass = () => {
     //return "translate-x-full ";
     switch (activePage) {
       case Page.Profile:
@@ -107,7 +113,7 @@ export const ProfilePage = ({
       default:
         return "translate-x-full ";
     }
-  };
+  };*/
 
   const getVerifiedStatus = () => {
     if (verififcationStatus === VERIFICATION_STATUS.WAITING)
@@ -137,7 +143,10 @@ export const ProfilePage = ({
   };
 
   return (
-    <PageContainer classes={getTranslateClass()} ref={animationRef}>
+    <PageContainer
+      classes={startAnimation ? "translate-x-0 " : "translate-x-full"}
+      ref={animationRef}
+    >
       <div className="flex text-white my-4 justify-between ">
         <Button
           onClick={onGoBackToInformationPage}

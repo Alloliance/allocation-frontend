@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { InformationPage } from "./pages/InformationPage";
 import { ProfilePage } from "./pages/ProfilePage";
@@ -14,31 +14,58 @@ export enum Page {
 }
 
 function App() {
-  const [page, setPage] = useState(Page.Information);
+  const [currentPage, setCurrentPage] = useState(Page.Information);
+  const [previousPage, setPreviousPage] = useState(Page.Information);
   const [profileInputValue, setProfileInputValue] = useState("");
   const [emailInputValue, setEmailInputValue] = useState("");
+  const [animationDone, setAnimationDone] = useState(true);
+
+  useEffect(() => {
+    console.log("page changed to", currentPage, "from", previousPage);
+    //setStartAnimation(true);
+    setAnimationDone(false);
+    if (currentPage !== previousPage) {
+      setTimeout(() => {
+        console.log("animation done!");
+        setAnimationDone(true);
+      }, 700);
+    }
+  }, [currentPage]);
 
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
         <div className="flex w-full overscroll-x-none font-mono">
-          <InformationPage
-            activePage={page}
-            onGoToProfile={() => setPage(Page.Profile)}
-          />
-          <ProfilePage
-            activePage={page}
-            onGoBackToInformationPage={() => setPage(Page.Information)}
-            onGoToVerifyPage={() => setPage(Page.Verify)}
-            setEmail={setEmailInputValue}
-            email={emailInputValue}
-            setProfile={setProfileInputValue}
-            profile={profileInputValue}
-          />
-          {page === Page.Verify ? (
+          {currentPage === Page.Information ||
+          (previousPage === Page.Information && !animationDone) ? (
+            <InformationPage
+              activePage={currentPage}
+              previousPage={previousPage}
+              onGoToProfile={() => {
+                setCurrentPage(Page.Profile);
+                setPreviousPage(Page.Information);
+              }}
+            />
+          ) : null}
+          {currentPage === Page.Profile ||
+          (previousPage === Page.Profile && !animationDone) ? (
+            <ProfilePage
+              activePage={currentPage}
+              onGoBackToInformationPage={() => {
+                setCurrentPage(Page.Information);
+                setPreviousPage(Page.Profile);
+              }}
+              onGoToVerifyPage={() => setCurrentPage(Page.Verify)}
+              setEmail={setEmailInputValue}
+              email={emailInputValue}
+              setProfile={setProfileInputValue}
+              profile={profileInputValue}
+            />
+          ) : null}
+          {currentPage === Page.Verify ? (
             <VerifyPage
-              activePage={page}
-              onGoBackToProfilePage={() => setPage(Page.Profile)}
+              activePage={currentPage}
+              onGoBackToProfilePage={() => setCurrentPage(Page.Profile)}
               email={emailInputValue}
               profile={profileInputValue}
             />
