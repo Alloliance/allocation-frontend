@@ -37,6 +37,7 @@ const convertVerificationStatus = (status: string) => {
 
 type Props = {
   activePage: Page;
+  previousPage: Page;
   onGoBackToInformationPage: () => void;
   onGoToVerifyPage: () => void;
 
@@ -49,6 +50,7 @@ type Props = {
 
 export const ProfilePage = ({
   activePage,
+  previousPage,
   onGoBackToInformationPage,
   onGoToVerifyPage,
   setEmail,
@@ -58,6 +60,12 @@ export const ProfilePage = ({
 }: Props) => {
   const [verififcationStatus, setVerififcationStatus] = useState(
     VERIFICATION_STATUS.NOT_VERIFIED
+  );
+  const [startAnimation, setStartAnimation] = useState(false);
+  const [showClass, setShowClass] = useState(
+    activePage === (Page.Profile || Page.Verify)
+      ? "translate-x-full"
+      : "translate-x-0"
   );
   const animationRef = useRef<HTMLElement | null>(null);
 
@@ -84,30 +92,30 @@ export const ProfilePage = ({
     getStatus();
   }, []);
 
-  /*useEffect(() => {
-    console.log("animationRef updated", animationRef.current);
-    const ref = animationRef?.current;
-    if (ref) {
-      console.log(ref.className);
-      setTimeout(() => {
-        ref.className = ref.className.replace(
-          "translate-x-full",
-          "translate-x-0"
-        );
-      }, 1);
-    }
-  }, [animationRef]);*/
+  useEffect(() => {
+    console.log("loaded profile page - start animation");
+    console.log("loaded on class:", showClass);
+    setStartAnimation(true);
+  }, []);
 
-  const getTranslateClass = () => {
-    //return "translate-x-full ";
-    switch (activePage) {
-      case Page.Profile:
-      case Page.Verify:
-        return "translate-x-0 ";
-      default:
-        return "translate-x-full ";
+  useEffect(() => {
+    if (startAnimation) {
+      console.log(
+        "Inside Profile page: activePage, previousPage has been updated"
+      );
+      console.log("activePage:", activePage);
+      console.log("previousPage:", previousPage);
+      console.log("from class:", showClass);
+      // Active page and animation has started/component has loaded = change so that it shows
+      if (activePage === (Page.Profile || Page.Verify)) {
+        setShowClass("translate-x-0");
+      }
+      if (previousPage === Page.Profile) {
+        setShowClass("translate-x-full");
+      }
+      console.log("to class:", showClass);
     }
-  };
+  }, [activePage, previousPage, startAnimation]);
 
   const getVerifiedStatus = () => {
     if (verififcationStatus === VERIFICATION_STATUS.WAITING)
@@ -137,7 +145,7 @@ export const ProfilePage = ({
   };
 
   return (
-    <PageContainer classes={getTranslateClass()} ref={animationRef}>
+    <PageContainer classes={showClass} ref={animationRef}>
       <div className="flex text-white my-4 justify-between ">
         <Button
           onClick={onGoBackToInformationPage}
